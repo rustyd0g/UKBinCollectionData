@@ -1,0 +1,22 @@
+An error occurred: Message: session not created: Chrome failed to start: exited normally.
+  (session not created: DevToolsActivePort file doesn't exist)
+  (The process started from chrome location /opt/google/chrome/chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+Stacktrace:
+#0 0x560e50b14eca <unknown>
+#1 0x560e507fe45c <unknown>
+#2 0x560e508336f8 <unknown>
+#3 0x560e5082f63b <unknown>
+#4 0x560e50879b19 <unknown>
+#5 0x560e5086d253 <unknown>
+#6 0x560e5083d1c7 <unknown>
+#7 0x560e5083db3e <unknown>
+#8 0x560e50adb30b <unknown>
+#9 0x560e50adf3b7 <unknown>
+#10 0x560e50ac7e3e <unknown>
+#11 0x560e50adfe82 <unknown>
+#12 0x560e50aac7df <unknown>
+#13 0x560e50b041b8 <unknown>
+#14 0x560e50b0438b <unknown>
+#15 0x560e50b13ffc <unknown>
+#16 0x7f728b494ac3 <unknown>
+
