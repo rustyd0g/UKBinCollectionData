@@ -1,0 +1,27 @@
+An error occurred: Message: element click intercepted: Element <div class="accordion closed meta-none  " id="when-and-where-should-i-put-my-bin-out" data-order-latest="2405192202" data-order-atoz="whenandwhereshouldiputmybinout?">...</div> is not clickable at point (392, 583). Other element would receive the click: <div class="toolbar-full-width">...</div>
+  (Session info: chrome-headless-shell=125.0.6422.60)
+Stacktrace:
+#0 0x55d433751eca <unknown>
+#1 0x55d43343b45c <unknown>
+#2 0x55d43348e336 <unknown>
+#3 0x55d43348c176 <unknown>
+#4 0x55d433489b57 <unknown>
+#5 0x55d43348897c <unknown>
+#6 0x55d43347c0ff <unknown>
+#7 0x55d4334aa4b2 <unknown>
+#8 0x55d43347ba79 <unknown>
+#9 0x55d4334aa67e <unknown>
+#10 0x55d4334c92cc <unknown>
+#11 0x55d4334aa253 <unknown>
+#12 0x55d43347a1c7 <unknown>
+#13 0x55d43347ab3e <unknown>
+#14 0x55d43371830b <unknown>
+#15 0x55d43371c3b7 <unknown>
+#16 0x55d433704e3e <unknown>
+#17 0x55d43371ce82 <unknown>
+#18 0x55d4336e97df <unknown>
+#19 0x55d4337411b8 <unknown>
+#20 0x55d43374138b <unknown>
+#21 0x55d433750ffc <unknown>
+#22 0x7f260aceaac3 <unknown>
+
