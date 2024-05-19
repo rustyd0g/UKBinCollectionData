@@ -1,0 +1,27 @@
+An error occurred: Message: element click intercepted: Element is not clickable at point (141, 639)
+  (Session info: chrome-headless-shell=125.0.6422.60)
+Stacktrace:
+#0 0x55acafc18eca <unknown>
+#1 0x55acaf90245c <unknown>
+#2 0x55acaf955336 <unknown>
+#3 0x55acaf953176 <unknown>
+#4 0x55acaf950b57 <unknown>
+#5 0x55acaf94f97c <unknown>
+#6 0x55acaf9430ff <unknown>
+#7 0x55acaf9714b2 <unknown>
+#8 0x55acaf942a79 <unknown>
+#9 0x55acaf97167e <unknown>
+#10 0x55acaf9902cc <unknown>
+#11 0x55acaf971253 <unknown>
+#12 0x55acaf9411c7 <unknown>
+#13 0x55acaf941b3e <unknown>
+#14 0x55acafbdf30b <unknown>
+#15 0x55acafbe33b7 <unknown>
+#16 0x55acafbcbe3e <unknown>
+#17 0x55acafbe3e82 <unknown>
+#18 0x55acafbb07df <unknown>
+#19 0x55acafc081b8 <unknown>
+#20 0x55acafc0838b <unknown>
+#21 0x55acafc17ffc <unknown>
+#22 0x7ff375e25ac3 <unknown>
+

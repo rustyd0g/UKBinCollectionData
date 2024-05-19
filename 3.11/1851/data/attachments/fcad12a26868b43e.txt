@@ -1,0 +1,25 @@
+An error occurred: Message: no such element: Unable to locate element: {"method":"link text","selector":"Choose this address"}
+  (Session info: chrome-headless-shell=125.0.6422.60); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x55ced141deca <unknown>
+#1 0x55ced110745c <unknown>
+#2 0x55ced11535b5 <unknown>
+#3 0x55ced1153671 <unknown>
+#4 0x55ced1147b96 <unknown>
+#5 0x55ced11764dd <unknown>
+#6 0x55ced1147a79 <unknown>
+#7 0x55ced117667e <unknown>
+#8 0x55ced11952cc <unknown>
+#9 0x55ced1176253 <unknown>
+#10 0x55ced11461c7 <unknown>
+#11 0x55ced1146b3e <unknown>
+#12 0x55ced13e430b <unknown>
+#13 0x55ced13e83b7 <unknown>
+#14 0x55ced13d0e3e <unknown>
+#15 0x55ced13e8e82 <unknown>
+#16 0x55ced13b57df <unknown>
+#17 0x55ced140d1b8 <unknown>
+#18 0x55ced140d38b <unknown>
+#19 0x55ced141cffc <unknown>
+#20 0x7f6aadd72ac3 <unknown>
+
