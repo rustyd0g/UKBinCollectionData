@@ -1,0 +1,24 @@
+An error occurred: Message: element not interactable
+  (Session info: chrome-headless-shell=125.0.6422.76)
+Stacktrace:
+#0 0x55a0ff0f2e9a <unknown>
+#1 0x55a0feddc2a1 <unknown>
+#2 0x55a0fee223e8 <unknown>
+#3 0x55a0fee207cf <unknown>
+#4 0x55a0fee4b4b2 <unknown>
+#5 0x55a0fee1ca79 <unknown>
+#6 0x55a0fee4b67e <unknown>
+#7 0x55a0fee6a2cc <unknown>
+#8 0x55a0fee4b253 <unknown>
+#9 0x55a0fee1b1c7 <unknown>
+#10 0x55a0fee1bb3e <unknown>
+#11 0x55a0ff0b92db <unknown>
+#12 0x55a0ff0bd387 <unknown>
+#13 0x55a0ff0a5e0e <unknown>
+#14 0x55a0ff0bde52 <unknown>
+#15 0x55a0ff08a7af <unknown>
+#16 0x55a0ff0e2188 <unknown>
+#17 0x55a0ff0e235b <unknown>
+#18 0x55a0ff0f1fcc <unknown>
+#19 0x7f3a91ac6ac3 <unknown>
+
