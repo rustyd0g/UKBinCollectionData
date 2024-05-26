@@ -1,0 +1,22 @@
+An error occurred: Message: 
+Stacktrace:
+#0 0x55ee13029e9a <unknown>
+#1 0x55ee12d1345c <unknown>
+#2 0x55ee12d5f5b5 <unknown>
+#3 0x55ee12d5f671 <unknown>
+#4 0x55ee12da3f14 <unknown>
+#5 0x55ee12d824dd <unknown>
+#6 0x55ee12da12cc <unknown>
+#7 0x55ee12d82253 <unknown>
+#8 0x55ee12d521c7 <unknown>
+#9 0x55ee12d52b3e <unknown>
+#10 0x55ee12ff02db <unknown>
+#11 0x55ee12ff4387 <unknown>
+#12 0x55ee12fdce0e <unknown>
+#13 0x55ee12ff4e52 <unknown>
+#14 0x55ee12fc17af <unknown>
+#15 0x55ee13019188 <unknown>
+#16 0x55ee1301935b <unknown>
+#17 0x55ee13028fcc <unknown>
+#18 0x7f84ec563ac3 <unknown>
+
