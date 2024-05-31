@@ -1,0 +1,25 @@
+Running test for council: BexleyCouncil
+An error occurred: Message: element not interactable
+  (Session info: chrome-headless-shell=125.0.6422.76)
+Stacktrace:
+#0 0x555dc795de9a <unknown>
+#1 0x555dc76472a1 <unknown>
+#2 0x555dc768d3e8 <unknown>
+#3 0x555dc768b7cf <unknown>
+#4 0x555dc76b64b2 <unknown>
+#5 0x555dc7687a79 <unknown>
+#6 0x555dc76b667e <unknown>
+#7 0x555dc76d52cc <unknown>
+#8 0x555dc76b6253 <unknown>
+#9 0x555dc76861c7 <unknown>
+#10 0x555dc7686b3e <unknown>
+#11 0x555dc79242db <unknown>
+#12 0x555dc7928387 <unknown>
+#13 0x555dc7910e0e <unknown>
+#14 0x555dc7928e52 <unknown>
+#15 0x555dc78f57af <unknown>
+#16 0x555dc794d188 <unknown>
+#17 0x555dc794d35b <unknown>
+#18 0x555dc795cfcc <unknown>
+#19 0x7f8b5331cac3 <unknown>
+
