@@ -1,0 +1,26 @@
+Running test for council: KnowsleyMBCouncil
+An error occurred: Message: no such element: Unable to locate element: {"method":"link text","selector":"Choose this address"}
+  (Session info: chrome-headless-shell=125.0.6422.76); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x558422c22e9a <unknown>
+#1 0x55842290c45c <unknown>
+#2 0x5584229585b5 <unknown>
+#3 0x558422958671 <unknown>
+#4 0x55842294cb96 <unknown>
+#5 0x55842297b4dd <unknown>
+#6 0x55842294ca79 <unknown>
+#7 0x55842297b67e <unknown>
+#8 0x55842299a2cc <unknown>
+#9 0x55842297b253 <unknown>
+#10 0x55842294b1c7 <unknown>
+#11 0x55842294bb3e <unknown>
+#12 0x558422be92db <unknown>
+#13 0x558422bed387 <unknown>
+#14 0x558422bd5e0e <unknown>
+#15 0x558422bede52 <unknown>
+#16 0x558422bba7af <unknown>
+#17 0x558422c12188 <unknown>
+#18 0x558422c1235b <unknown>
+#19 0x558422c21fcc <unknown>
+#20 0x7f10b8932ac3 <unknown>
+
