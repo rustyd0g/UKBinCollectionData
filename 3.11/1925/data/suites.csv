@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jun 05 21:19:12 GMT 2024","Wed Jun 05 21:19:17 GMT 2024","5229","","","","","","Validate Council Output [BirminghamCityCouncil]",""
+"passed","Wed Jun 05 21:19:12 GMT 2024","Wed Jun 05 21:19:48 GMT 2024","36145","","","","","","Validate Council Output [BromleyBoroughCouncil]",""
+"passed","Wed Jun 05 21:19:17 GMT 2024","Wed Jun 05 21:19:23 GMT 2024","5916","","","","","","Validate Council Output [WokingBoroughCouncil]",""
+"passed","Wed Jun 05 21:19:12 GMT 2024","Wed Jun 05 21:19:15 GMT 2024","3045","","","","","","Validate Council Output [HaringeyCouncil]",""
+"passed","Wed Jun 05 21:19:12 GMT 2024","Wed Jun 05 21:19:31 GMT 2024","19373","","","","","","Validate Council Output [BuckinghamshireCouncil]",""
+"passed","Wed Jun 05 21:19:48 GMT 2024","Wed Jun 05 21:19:55 GMT 2024","7302","","","","","","Validate Council Output [WychavonDistrictCouncil]",""
