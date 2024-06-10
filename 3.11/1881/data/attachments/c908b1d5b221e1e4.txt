@@ -1,2 +1,0 @@
-Exception encountered: Invalid house number
-Please check the provided house number.
