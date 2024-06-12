@@ -1,0 +1,23 @@
+Running test for council: ChelmsfordCityCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x557769c27e9a <unknown>
+#1 0x55776991145c <unknown>
+#2 0x55776995d5b5 <unknown>
+#3 0x55776995d671 <unknown>
+#4 0x5577699a1f14 <unknown>
+#5 0x5577699804dd <unknown>
+#6 0x55776999f2cc <unknown>
+#7 0x557769980253 <unknown>
+#8 0x5577699501c7 <unknown>
+#9 0x557769950b3e <unknown>
+#10 0x557769bee2db <unknown>
+#11 0x557769bf2387 <unknown>
+#12 0x557769bdae0e <unknown>
+#13 0x557769bf2e52 <unknown>
+#14 0x557769bbf7af <unknown>
+#15 0x557769c17188 <unknown>
+#16 0x557769c1735b <unknown>
+#17 0x557769c26fcc <unknown>
+#18 0x7fb73d4d6ac3 <unknown>
+
