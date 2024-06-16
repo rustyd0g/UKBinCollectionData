@@ -1,0 +1,24 @@
+Running test for council: NeathPortTalbotCouncil
+An error occurred: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ContentPlaceHolderDefault_ctl13_nptLLPG2_25_addresslookup_txtTmpPostcode"]"}
+  (Session info: chrome-headless-shell=125.0.6422.76); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x55b748788e9a <unknown>
+#1 0x55b74847245c <unknown>
+#2 0x55b7484be5b5 <unknown>
+#3 0x55b7484be671 <unknown>
+#4 0x55b748502f14 <unknown>
+#5 0x55b7484e14dd <unknown>
+#6 0x55b7485002cc <unknown>
+#7 0x55b7484e1253 <unknown>
+#8 0x55b7484b11c7 <unknown>
+#9 0x55b7484b1b3e <unknown>
+#10 0x55b74874f2db <unknown>
+#11 0x55b748753387 <unknown>
+#12 0x55b74873be0e <unknown>
+#13 0x55b748753e52 <unknown>
+#14 0x55b7487207af <unknown>
+#15 0x55b748778188 <unknown>
+#16 0x55b74877835b <unknown>
+#17 0x55b748787fcc <unknown>
+#18 0x7f53f7809ac3 <unknown>
+
