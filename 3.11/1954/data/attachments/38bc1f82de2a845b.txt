@@ -1,0 +1,28 @@
+Running test for council: BarnetCouncil
+An error occurred: Message: element click intercepted: Element is not clickable at point (69, 1536)
+  (Session info: chrome-headless-shell=126.0.6478.114)
+Stacktrace:
+#0 0x5589a7f0f69a <unknown>
+#1 0x5589a7bf20dc <unknown>
+#2 0x5589a7c456c6 <unknown>
+#3 0x5589a7c43516 <unknown>
+#4 0x5589a7c40ef7 <unknown>
+#5 0x5589a7c3fd2c <unknown>
+#6 0x5589a7c3340f <unknown>
+#7 0x5589a7c61872 <unknown>
+#8 0x5589a7c32d89 <unknown>
+#9 0x5589a7c61a3e <unknown>
+#10 0x5589a7c805c3 <unknown>
+#11 0x5589a7c61613 <unknown>
+#12 0x5589a7c314f7 <unknown>
+#13 0x5589a7c31e4e <unknown>
+#14 0x5589a7ed586b <unknown>
+#15 0x5589a7ed9911 <unknown>
+#16 0x5589a7ec135e <unknown>
+#17 0x5589a7eda472 <unknown>
+#18 0x5589a7ea5cbf <unknown>
+#19 0x5589a7eff098 <unknown>
+#20 0x5589a7eff270 <unknown>
+#21 0x5589a7f0e7cc <unknown>
+#22 0x7f657bb04ac3 <unknown>
+
