@@ -1,1 +1,0 @@
-ERROR    uk_bin_collection.uk_bin_collection.get_bin_data:get_bin_data.py:135 Error Connecting: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
