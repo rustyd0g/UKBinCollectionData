@@ -1,0 +1,23 @@
+Running test for council: BromleyBoroughCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x56064fd4a69a <unknown>
+#1 0x56064fa2d0dc <unknown>
+#2 0x56064fa79931 <unknown>
+#3 0x56064fa79a21 <unknown>
+#4 0x56064fabe234 <unknown>
+#5 0x56064fa9c89d <unknown>
+#6 0x56064fabb5c3 <unknown>
+#7 0x56064fa9c613 <unknown>
+#8 0x56064fa6c4f7 <unknown>
+#9 0x56064fa6ce4e <unknown>
+#10 0x56064fd1086b <unknown>
+#11 0x56064fd14911 <unknown>
+#12 0x56064fcfc35e <unknown>
+#13 0x56064fd15472 <unknown>
+#14 0x56064fce0cbf <unknown>
+#15 0x56064fd3a098 <unknown>
+#16 0x56064fd3a270 <unknown>
+#17 0x56064fd497cc <unknown>
+#18 0x7fabebd54ac3 <unknown>
+
