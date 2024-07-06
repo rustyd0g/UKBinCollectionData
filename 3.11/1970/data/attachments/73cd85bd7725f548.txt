@@ -1,0 +1,21 @@
+ERROR    root:CheshireWestAndChesterCouncil.py:119 An error occurred: Message: 
+Stacktrace:
+#0 0x5613393a169a <unknown>
+#1 0x5613390840dc <unknown>
+#2 0x5613390d0931 <unknown>
+#3 0x5613390d0a21 <unknown>
+#4 0x561339115234 <unknown>
+#5 0x5613390f389d <unknown>
+#6 0x5613391125c3 <unknown>
+#7 0x5613390f3613 <unknown>
+#8 0x5613390c34f7 <unknown>
+#9 0x5613390c3e4e <unknown>
+#10 0x56133936786b <unknown>
+#11 0x56133936b911 <unknown>
+#12 0x56133935335e <unknown>
+#13 0x56133936c472 <unknown>
+#14 0x561339337cbf <unknown>
+#15 0x561339391098 <unknown>
+#16 0x561339391270 <unknown>
+#17 0x5613393a07cc <unknown>
+#18 0x7f5dfcf85ac3 <unknown>
