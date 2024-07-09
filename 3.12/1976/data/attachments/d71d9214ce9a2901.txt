@@ -1,0 +1,23 @@
+Running test for council: WestBerkshireCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x561788bbd69a <unknown>
+#1 0x5617888a00dc <unknown>
+#2 0x5617888ec931 <unknown>
+#3 0x5617888eca21 <unknown>
+#4 0x561788931234 <unknown>
+#5 0x56178890f89d <unknown>
+#6 0x56178892e5c3 <unknown>
+#7 0x56178890f613 <unknown>
+#8 0x5617888df4f7 <unknown>
+#9 0x5617888dfe4e <unknown>
+#10 0x561788b8386b <unknown>
+#11 0x561788b87911 <unknown>
+#12 0x561788b6f35e <unknown>
+#13 0x561788b88472 <unknown>
+#14 0x561788b53cbf <unknown>
+#15 0x561788bad098 <unknown>
+#16 0x561788bad270 <unknown>
+#17 0x561788bbc7cc <unknown>
+#18 0x7f6d0cb74ac3 <unknown>
+
