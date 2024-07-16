@@ -1,0 +1,25 @@
+Running test for council: WalthamForest
+An error occurred: Message: element not interactable
+  (Session info: chrome-headless-shell=126.0.6478.114)
+Stacktrace:
+#0 0x555d46f0969a <unknown>
+#1 0x555d46bebf21 <unknown>
+#2 0x555d46c326d8 <unknown>
+#3 0x555d46c30abf <unknown>
+#4 0x555d46c5b872 <unknown>
+#5 0x555d46c2cd89 <unknown>
+#6 0x555d46c5ba3e <unknown>
+#7 0x555d46c7a5c3 <unknown>
+#8 0x555d46c5b613 <unknown>
+#9 0x555d46c2b4f7 <unknown>
+#10 0x555d46c2be4e <unknown>
+#11 0x555d46ecf86b <unknown>
+#12 0x555d46ed3911 <unknown>
+#13 0x555d46ebb35e <unknown>
+#14 0x555d46ed4472 <unknown>
+#15 0x555d46e9fcbf <unknown>
+#16 0x555d46ef9098 <unknown>
+#17 0x555d46ef9270 <unknown>
+#18 0x555d46f087cc <unknown>
+#19 0x7f79d9733ac3 <unknown>
+
