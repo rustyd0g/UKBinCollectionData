@@ -1,0 +1,24 @@
+Running test for council: EastLindseyDistrictCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x5576bae386ba <unknown>
+#1 0x5576bab08730 <unknown>
+#2 0x5576bab57d9b <unknown>
+#3 0x5576bab58081 <unknown>
+#4 0x5576bab9bcd4 <unknown>
+#5 0x5576bab7aa7d <unknown>
+#6 0x5576bab991ca <unknown>
+#7 0x5576bab7a7f3 <unknown>
+#8 0x5576bab4aec9 <unknown>
+#9 0x5576bab4b91e <unknown>
+#10 0x5576badfe9eb <unknown>
+#11 0x5576bae02972 <unknown>
+#12 0x5576badebe15 <unknown>
+#13 0x5576bae03502 <unknown>
+#14 0x5576badd0d2f <unknown>
+#15 0x5576bae27578 <unknown>
+#16 0x5576bae27750 <unknown>
+#17 0x5576bae3748c <unknown>
+#18 0x7f1bdfc76a94 <unknown>
+#19 0x7f1bdfd03a34 __clone
+
