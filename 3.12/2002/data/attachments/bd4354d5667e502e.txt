@@ -1,0 +1,29 @@
+Running test for council: EastRidingCouncil
+An error occurred: Message: element click intercepted: Element <div class="accordion closed meta-none  " id="when-and-where-should-i-put-my-bin-out" data-order-latest="2408010115" data-order-atoz="whenandwhereshouldiputmybinout?">...</div> is not clickable at point (392, 583). Other element would receive the click: <div class="toolbar-full-width">...</div>
+  (Session info: chrome-headless-shell=127.0.6533.72)
+Stacktrace:
+#0 0x55944517d6ba <unknown>
+#1 0x559444e4d730 <unknown>
+#2 0x559444ea3a96 <unknown>
+#3 0x559444ea19ad <unknown>
+#4 0x559444e9f447 <unknown>
+#5 0x559444e9e30e <unknown>
+#6 0x559444e91d66 <unknown>
+#7 0x559444ebfa52 <unknown>
+#8 0x559444e91719 <unknown>
+#9 0x559444ebfc1e <unknown>
+#10 0x559444ede1ca <unknown>
+#11 0x559444ebf7f3 <unknown>
+#12 0x559444e8fec9 <unknown>
+#13 0x559444e9091e <unknown>
+#14 0x5594451439eb <unknown>
+#15 0x559445147972 <unknown>
+#16 0x559445130e15 <unknown>
+#17 0x559445148502 <unknown>
+#18 0x559445115d2f <unknown>
+#19 0x55944516c578 <unknown>
+#20 0x55944516c750 <unknown>
+#21 0x55944517c48c <unknown>
+#22 0x7f4b8efa2a94 <unknown>
+#23 0x7f4b8f02fa34 __clone
+
