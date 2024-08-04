@@ -1,2 +1,0 @@
-Running test for council: BexleyCouncil
-An error occurred: time data 'Being collected today' does not match format '%A %d %B'
