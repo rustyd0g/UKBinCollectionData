@@ -1,0 +1,24 @@
+Running test for council: LeedsCityCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x557999d5f6ba <unknown>
+#1 0x557999a2f730 <unknown>
+#2 0x557999a7ed9b <unknown>
+#3 0x557999a7f081 <unknown>
+#4 0x557999ac2cd4 <unknown>
+#5 0x557999aa1a7d <unknown>
+#6 0x557999ac01ca <unknown>
+#7 0x557999aa17f3 <unknown>
+#8 0x557999a71ec9 <unknown>
+#9 0x557999a7291e <unknown>
+#10 0x557999d259eb <unknown>
+#11 0x557999d29972 <unknown>
+#12 0x557999d12e15 <unknown>
+#13 0x557999d2a502 <unknown>
+#14 0x557999cf7d2f <unknown>
+#15 0x557999d4e578 <unknown>
+#16 0x557999d4e750 <unknown>
+#17 0x557999d5e48c <unknown>
+#18 0x7f2d399e0a94 <unknown>
+#19 0x7f2d39a6da34 __clone
+

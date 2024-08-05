@@ -1,0 +1,24 @@
+Running test for council: ArunCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x558e1ecbc6ba <unknown>
+#1 0x558e1e98c730 <unknown>
+#2 0x558e1e9dbd9b <unknown>
+#3 0x558e1e9dc081 <unknown>
+#4 0x558e1ea1fcd4 <unknown>
+#5 0x558e1e9fea7d <unknown>
+#6 0x558e1ea1d1ca <unknown>
+#7 0x558e1e9fe7f3 <unknown>
+#8 0x558e1e9ceec9 <unknown>
+#9 0x558e1e9cf91e <unknown>
+#10 0x558e1ec829eb <unknown>
+#11 0x558e1ec86972 <unknown>
+#12 0x558e1ec6fe15 <unknown>
+#13 0x558e1ec87502 <unknown>
+#14 0x558e1ec54d2f <unknown>
+#15 0x558e1ecab578 <unknown>
+#16 0x558e1ecab750 <unknown>
+#17 0x558e1ecbb48c <unknown>
+#18 0x7fb2ed160a94 <unknown>
+#19 0x7fb2ed1eda34 __clone
+

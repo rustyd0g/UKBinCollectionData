@@ -1,0 +1,24 @@
+Running test for council: LondonBoroughRedbridge
+An error occurred: Message: 
+Stacktrace:
+#0 0x55f7cf5b56ba <unknown>
+#1 0x55f7cf285730 <unknown>
+#2 0x55f7cf2d4d9b <unknown>
+#3 0x55f7cf2d5081 <unknown>
+#4 0x55f7cf318cd4 <unknown>
+#5 0x55f7cf2f7a7d <unknown>
+#6 0x55f7cf3161ca <unknown>
+#7 0x55f7cf2f77f3 <unknown>
+#8 0x55f7cf2c7ec9 <unknown>
+#9 0x55f7cf2c891e <unknown>
+#10 0x55f7cf57b9eb <unknown>
+#11 0x55f7cf57f972 <unknown>
+#12 0x55f7cf568e15 <unknown>
+#13 0x55f7cf580502 <unknown>
+#14 0x55f7cf54dd2f <unknown>
+#15 0x55f7cf5a4578 <unknown>
+#16 0x55f7cf5a4750 <unknown>
+#17 0x55f7cf5b448c <unknown>
+#18 0x7f1d668b9a94 <unknown>
+#19 0x7f1d66946a34 __clone
+
