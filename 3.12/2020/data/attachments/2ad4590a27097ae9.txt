@@ -1,0 +1,24 @@
+Running test for council: ChichesterDistrictCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x5599451f66ba <unknown>
+#1 0x559944ec6730 <unknown>
+#2 0x559944f15d9b <unknown>
+#3 0x559944f16081 <unknown>
+#4 0x559944f59cd4 <unknown>
+#5 0x559944f38a7d <unknown>
+#6 0x559944f571ca <unknown>
+#7 0x559944f387f3 <unknown>
+#8 0x559944f08ec9 <unknown>
+#9 0x559944f0991e <unknown>
+#10 0x5599451bc9eb <unknown>
+#11 0x5599451c0972 <unknown>
+#12 0x5599451a9e15 <unknown>
+#13 0x5599451c1502 <unknown>
+#14 0x55994518ed2f <unknown>
+#15 0x5599451e5578 <unknown>
+#16 0x5599451e5750 <unknown>
+#17 0x5599451f548c <unknown>
+#18 0x7fcb4b922a94 <unknown>
+#19 0x7fcb4b9afa34 __clone
+
