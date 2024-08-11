@@ -1,0 +1,24 @@
+Running test for council: ForestOfDeanDistrictCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x563e08fc56ba <unknown>
+#1 0x563e08c95730 <unknown>
+#2 0x563e08ce4d9b <unknown>
+#3 0x563e08ce5081 <unknown>
+#4 0x563e08d28cd4 <unknown>
+#5 0x563e08d07a7d <unknown>
+#6 0x563e08d261ca <unknown>
+#7 0x563e08d077f3 <unknown>
+#8 0x563e08cd7ec9 <unknown>
+#9 0x563e08cd891e <unknown>
+#10 0x563e08f8b9eb <unknown>
+#11 0x563e08f8f972 <unknown>
+#12 0x563e08f78e15 <unknown>
+#13 0x563e08f90502 <unknown>
+#14 0x563e08f5dd2f <unknown>
+#15 0x563e08fb4578 <unknown>
+#16 0x563e08fb4750 <unknown>
+#17 0x563e08fc448c <unknown>
+#18 0x7f5dab79ca94 <unknown>
+#19 0x7f5dab829a34 __clone
+

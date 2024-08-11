@@ -1,0 +1,29 @@
+Running test for council: NeathPortTalbotCouncil
+An error occurred: Message: element click intercepted: Element is not clickable at point (589, 636)
+  (Session info: chrome-headless-shell=127.0.6533.72)
+Stacktrace:
+#0 0x5556520926ba <unknown>
+#1 0x555651d62730 <unknown>
+#2 0x555651db8a96 <unknown>
+#3 0x555651db69ad <unknown>
+#4 0x555651db4447 <unknown>
+#5 0x555651db330e <unknown>
+#6 0x555651da6d66 <unknown>
+#7 0x555651dd4a52 <unknown>
+#8 0x555651da6719 <unknown>
+#9 0x555651dd4c1e <unknown>
+#10 0x555651df31ca <unknown>
+#11 0x555651dd47f3 <unknown>
+#12 0x555651da4ec9 <unknown>
+#13 0x555651da591e <unknown>
+#14 0x5556520589eb <unknown>
+#15 0x55565205c972 <unknown>
+#16 0x555652045e15 <unknown>
+#17 0x55565205d502 <unknown>
+#18 0x55565202ad2f <unknown>
+#19 0x555652081578 <unknown>
+#20 0x555652081750 <unknown>
+#21 0x55565209148c <unknown>
+#22 0x7f7e714e3a94 <unknown>
+#23 0x7f7e71570a34 __clone
+

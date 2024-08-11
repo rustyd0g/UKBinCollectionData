@@ -1,0 +1,32 @@
+Running test for council: BuckinghamshireCouncil
+An error occurred: Message: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: chrome-headless-shell=127.0.6533.72)
+Stacktrace:
+#0 0x557b96e276ba <unknown>
+#1 0x557b96af7730 <unknown>
+#2 0x557b96aef761 <unknown>
+#3 0x557b96adf8f9 <unknown>
+#4 0x557b96ae1684 <unknown>
+#5 0x557b96adfbc5 <unknown>
+#6 0x557b96adf426 <unknown>
+#7 0x557b96adf31e <unknown>
+#8 0x557b96add64c <unknown>
+#9 0x557b96add9ca <unknown>
+#10 0x557b96afa051 <unknown>
+#11 0x557b96b88cc5 <unknown>
+#12 0x557b96b69a52 <unknown>
+#13 0x557b96b881ca <unknown>
+#14 0x557b96b697f3 <unknown>
+#15 0x557b96b39ec9 <unknown>
+#16 0x557b96b3a91e <unknown>
+#17 0x557b96ded9eb <unknown>
+#18 0x557b96df1972 <unknown>
+#19 0x557b96ddae15 <unknown>
+#20 0x557b96df2502 <unknown>
+#21 0x557b96dbfd2f <unknown>
+#22 0x557b96e16578 <unknown>
+#23 0x557b96e16750 <unknown>
+#24 0x557b96e2648c <unknown>
+#25 0x7fb46f653a94 <unknown>
+#26 0x7fb46f6e0a34 __clone
+
