@@ -1,0 +1,26 @@
+ERROR    root:ThreeRiversDistrictCouncil.py:135 An error occurred: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome-headless-shell=127.0.6533.72); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+#0 0x5600341546ba <unknown>
+#1 0x560033e24730 <unknown>
+#2 0x560033e2a5c1 <unknown>
+#3 0x560033e2c1f5 <unknown>
+#4 0x560033e2c27c <unknown>
+#5 0x560033e6e6b2 <unknown>
+#6 0x560033e96a52 <unknown>
+#7 0x560033e68719 <unknown>
+#8 0x560033e96c1e <unknown>
+#9 0x560033eb51ca <unknown>
+#10 0x560033e967f3 <unknown>
+#11 0x560033e66ec9 <unknown>
+#12 0x560033e6791e <unknown>
+#13 0x56003411a9eb <unknown>
+#14 0x56003411e972 <unknown>
+#15 0x560034107e15 <unknown>
+#16 0x56003411f502 <unknown>
+#17 0x5600340ecd2f <unknown>
+#18 0x560034143578 <unknown>
+#19 0x560034143750 <unknown>
+#20 0x56003415348c <unknown>
+#21 0x7f3badb3ba94 <unknown>
+#22 0x7f3badbc8a34 __clone
