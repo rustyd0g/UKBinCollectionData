@@ -1,0 +1,24 @@
+Running test for council: HighPeakCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55c96af426aa <unknown>
+#1 0x55c96ac13600 <unknown>
+#2 0x55c96ac62bcb <unknown>
+#3 0x55c96ac62eb1 <unknown>
+#4 0x55c96aca6b24 <unknown>
+#5 0x55c96ac858cd <unknown>
+#6 0x55c96aca404a <unknown>
+#7 0x55c96ac85643 <unknown>
+#8 0x55c96ac55d31 <unknown>
+#9 0x55c96ac5679e <unknown>
+#10 0x55c96af0a23b <unknown>
+#11 0x55c96af0e1d2 <unknown>
+#12 0x55c96aef75f5 <unknown>
+#13 0x55c96af0ed62 <unknown>
+#14 0x55c96aedc23f <unknown>
+#15 0x55c96af31e48 <unknown>
+#16 0x55c96af32020 <unknown>
+#17 0x55c96af4147c <unknown>
+#18 0x7f9efc7f7a94 <unknown>
+#19 0x7f9efc884a34 __clone
+
