@@ -1,0 +1,24 @@
+Running test for council: GatesheadCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55dc29c5e6aa <unknown>
+#1 0x55dc2992f600 <unknown>
+#2 0x55dc2997ebcb <unknown>
+#3 0x55dc2997eeb1 <unknown>
+#4 0x55dc299c2b24 <unknown>
+#5 0x55dc299a18cd <unknown>
+#6 0x55dc299c004a <unknown>
+#7 0x55dc299a1643 <unknown>
+#8 0x55dc29971d31 <unknown>
+#9 0x55dc2997279e <unknown>
+#10 0x55dc29c2623b <unknown>
+#11 0x55dc29c2a1d2 <unknown>
+#12 0x55dc29c135f5 <unknown>
+#13 0x55dc29c2ad62 <unknown>
+#14 0x55dc29bf823f <unknown>
+#15 0x55dc29c4de48 <unknown>
+#16 0x55dc29c4e020 <unknown>
+#17 0x55dc29c5d47c <unknown>
+#18 0x7ff5d53cfa94 <unknown>
+#19 0x7ff5d545ca34 __clone
+
