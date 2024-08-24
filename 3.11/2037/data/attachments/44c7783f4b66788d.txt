@@ -1,0 +1,24 @@
+Running test for council: ReigateAndBansteadBoroughCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55a44e1636ca <unknown>
+#1 0x55a44de34600 <unknown>
+#2 0x55a44de83bcb <unknown>
+#3 0x55a44de83eb1 <unknown>
+#4 0x55a44dec7b24 <unknown>
+#5 0x55a44dea68cd <unknown>
+#6 0x55a44dec504a <unknown>
+#7 0x55a44dea6643 <unknown>
+#8 0x55a44de76d31 <unknown>
+#9 0x55a44de7779e <unknown>
+#10 0x55a44e12b25b <unknown>
+#11 0x55a44e12f1f2 <unknown>
+#12 0x55a44e118615 <unknown>
+#13 0x55a44e12fd82 <unknown>
+#14 0x55a44e0fd25f <unknown>
+#15 0x55a44e152e68 <unknown>
+#16 0x55a44e153040 <unknown>
+#17 0x55a44e16249c <unknown>
+#18 0x7fb95ab4fa94 <unknown>
+#19 0x7fb95abdca34 __clone
+
