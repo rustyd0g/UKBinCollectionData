@@ -1,0 +1,24 @@
+Running test for council: CalderdaleCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55b41abc78da <unknown>
+#1 0x55b41a895e50 <unknown>
+#2 0x55b41a8e5644 <unknown>
+#3 0x55b41a8e5931 <unknown>
+#4 0x55b41a92b534 <unknown>
+#5 0x55b41a90a4bd <unknown>
+#6 0x55b41a9289c6 <unknown>
+#7 0x55b41a90a233 <unknown>
+#8 0x55b41a8d8093 <unknown>
+#9 0x55b41a8d909e <unknown>
+#10 0x55b41ab8eb3b <unknown>
+#11 0x55b41ab92af1 <unknown>
+#12 0x55b41ab7a705 <unknown>
+#13 0x55b41ab93662 <unknown>
+#14 0x55b41ab5f8df <unknown>
+#15 0x55b41abb66d8 <unknown>
+#16 0x55b41abb68a2 <unknown>
+#17 0x55b41abc66cc <unknown>
+#18 0x7f287af54a94 <unknown>
+#19 0x7f287afe1a34 __clone
+
