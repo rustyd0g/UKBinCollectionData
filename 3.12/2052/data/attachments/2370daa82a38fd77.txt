@@ -1,0 +1,24 @@
+Running test for council: NorthEastDerbyshireDistrictCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x562e33e468da <unknown>
+#1 0x562e33b14e50 <unknown>
+#2 0x562e33b64644 <unknown>
+#3 0x562e33b64931 <unknown>
+#4 0x562e33baa534 <unknown>
+#5 0x562e33b894bd <unknown>
+#6 0x562e33ba79c6 <unknown>
+#7 0x562e33b89233 <unknown>
+#8 0x562e33b57093 <unknown>
+#9 0x562e33b5809e <unknown>
+#10 0x562e33e0db3b <unknown>
+#11 0x562e33e11af1 <unknown>
+#12 0x562e33df9705 <unknown>
+#13 0x562e33e12662 <unknown>
+#14 0x562e33dde8df <unknown>
+#15 0x562e33e356d8 <unknown>
+#16 0x562e33e358a2 <unknown>
+#17 0x562e33e456cc <unknown>
+#18 0x7faed8cefa94 <unknown>
+#19 0x7faed8d7ca34 __clone
+
