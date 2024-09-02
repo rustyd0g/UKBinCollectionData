@@ -1,2 +1,0 @@
-Running test for council: SunderlandCityCouncil
-An error occurred: 'NoneType' object has no attribute 'get_text'
