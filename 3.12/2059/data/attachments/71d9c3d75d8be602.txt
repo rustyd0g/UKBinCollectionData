@@ -1,0 +1,28 @@
+Running test for council: EastRidingCouncil
+An error occurred: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=128.0.6613.113); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+#0 0x558038db48da <unknown>
+#1 0x558038a82e50 <unknown>
+#2 0x558038a88c68 <unknown>
+#3 0x558038a8a935 <unknown>
+#4 0x558038a8a9bc <unknown>
+#5 0x558038acd031 <unknown>
+#6 0x558038af7492 <unknown>
+#7 0x558038ac6e89 <unknown>
+#8 0x558038af765e <unknown>
+#9 0x558038b159c6 <unknown>
+#10 0x558038af7233 <unknown>
+#11 0x558038ac5093 <unknown>
+#12 0x558038ac609e <unknown>
+#13 0x558038d7bb3b <unknown>
+#14 0x558038d7faf1 <unknown>
+#15 0x558038d67705 <unknown>
+#16 0x558038d80662 <unknown>
+#17 0x558038d4c8df <unknown>
+#18 0x558038da36d8 <unknown>
+#19 0x558038da38a2 <unknown>
+#20 0x558038db36cc <unknown>
+#21 0x7f169d861a94 <unknown>
+#22 0x7f169d8eea34 __clone
+
