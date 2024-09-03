@@ -1,0 +1,24 @@
+Running test for council: KnowsleyMBCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x5619f84418da <unknown>
+#1 0x5619f810fe50 <unknown>
+#2 0x5619f815f644 <unknown>
+#3 0x5619f815f931 <unknown>
+#4 0x5619f81a5534 <unknown>
+#5 0x5619f81844bd <unknown>
+#6 0x5619f81a29c6 <unknown>
+#7 0x5619f8184233 <unknown>
+#8 0x5619f8152093 <unknown>
+#9 0x5619f815309e <unknown>
+#10 0x5619f8408b3b <unknown>
+#11 0x5619f840caf1 <unknown>
+#12 0x5619f83f4705 <unknown>
+#13 0x5619f840d662 <unknown>
+#14 0x5619f83d98df <unknown>
+#15 0x5619f84306d8 <unknown>
+#16 0x5619f84308a2 <unknown>
+#17 0x5619f84406cc <unknown>
+#18 0x7f3d383afa94 <unknown>
+#19 0x7f3d3843ca34 __clone
+
