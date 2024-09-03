@@ -1,0 +1,2 @@
+Running test for council: StratfordUponAvonCouncil
+An error occurred: HTTPSConnectionPool(host='www.stratford.gov.uk', port=443): Max retries exceeded with url: /waste-recycling/when-we-collect.cfm/part/calendar (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f4b5d1b33d0>, 'Connection to www.stratford.gov.uk timed out. (connect timeout=None)'))
