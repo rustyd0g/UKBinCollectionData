@@ -1,0 +1,24 @@
+Running test for council: EastSuffolkCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x555fc91468da <unknown>
+#1 0x555fc8e14e50 <unknown>
+#2 0x555fc8e64644 <unknown>
+#3 0x555fc8e64931 <unknown>
+#4 0x555fc8eaa534 <unknown>
+#5 0x555fc8e894bd <unknown>
+#6 0x555fc8ea79c6 <unknown>
+#7 0x555fc8e89233 <unknown>
+#8 0x555fc8e57093 <unknown>
+#9 0x555fc8e5809e <unknown>
+#10 0x555fc910db3b <unknown>
+#11 0x555fc9111af1 <unknown>
+#12 0x555fc90f9705 <unknown>
+#13 0x555fc9112662 <unknown>
+#14 0x555fc90de8df <unknown>
+#15 0x555fc91356d8 <unknown>
+#16 0x555fc91358a2 <unknown>
+#17 0x555fc91456cc <unknown>
+#18 0x7fbd90365a94 <unknown>
+#19 0x7fbd903f2a34 __clone
+
