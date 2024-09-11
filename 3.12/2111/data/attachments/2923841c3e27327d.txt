@@ -1,0 +1,25 @@
+Running test for council: DerbyshireDalesDistrictCouncil
+An error occurred: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ctl00_ContentPlaceHolder1_FF2924TB"]"}
+  (Session info: chrome=128.0.6613.119); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x55b7cdc8e86a <unknown>
+#1 0x55b7cd95ce50 <unknown>
+#2 0x55b7cd9ac644 <unknown>
+#3 0x55b7cd9ac931 <unknown>
+#4 0x55b7cd9f2534 <unknown>
+#5 0x55b7cd9d14bd <unknown>
+#6 0x55b7cd9ef9c6 <unknown>
+#7 0x55b7cd9d1233 <unknown>
+#8 0x55b7cd99f093 <unknown>
+#9 0x55b7cd9a009e <unknown>
+#10 0x55b7cdc55acb <unknown>
+#11 0x55b7cdc59a81 <unknown>
+#12 0x55b7cdc41695 <unknown>
+#13 0x55b7cdc5a5f2 <unknown>
+#14 0x55b7cdc2686f <unknown>
+#15 0x55b7cdc7d668 <unknown>
+#16 0x55b7cdc7d832 <unknown>
+#17 0x55b7cdc8d65c <unknown>
+#18 0x7fbb725c9a94 <unknown>
+#19 0x7fbb72656a34 __clone
+
