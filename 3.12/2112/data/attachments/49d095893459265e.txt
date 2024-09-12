@@ -1,0 +1,24 @@
+Running test for council: HounslowCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55e9612e786a <unknown>
+#1 0x55e960fb5e50 <unknown>
+#2 0x55e961005644 <unknown>
+#3 0x55e961005931 <unknown>
+#4 0x55e96104b534 <unknown>
+#5 0x55e96102a4bd <unknown>
+#6 0x55e9610489c6 <unknown>
+#7 0x55e96102a233 <unknown>
+#8 0x55e960ff8093 <unknown>
+#9 0x55e960ff909e <unknown>
+#10 0x55e9612aeacb <unknown>
+#11 0x55e9612b2a81 <unknown>
+#12 0x55e96129a695 <unknown>
+#13 0x55e9612b35f2 <unknown>
+#14 0x55e96127f86f <unknown>
+#15 0x55e9612d6668 <unknown>
+#16 0x55e9612d6832 <unknown>
+#17 0x55e9612e665c <unknown>
+#18 0x7f4597d76a94 <unknown>
+#19 0x7f4597e03a34 __clone
+
