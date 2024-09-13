@@ -1,0 +1,22 @@
+ERROR    root:WychavonDistrictCouncil.py:151 An error occurred: Message: 
+Stacktrace:
+#0 0x5563c63eb86a <unknown>
+#1 0x5563c60b9e50 <unknown>
+#2 0x5563c6109644 <unknown>
+#3 0x5563c6109931 <unknown>
+#4 0x5563c614f534 <unknown>
+#5 0x5563c612e4bd <unknown>
+#6 0x5563c614c9c6 <unknown>
+#7 0x5563c612e233 <unknown>
+#8 0x5563c60fc093 <unknown>
+#9 0x5563c60fd09e <unknown>
+#10 0x5563c63b2acb <unknown>
+#11 0x5563c63b6a81 <unknown>
+#12 0x5563c639e695 <unknown>
+#13 0x5563c63b75f2 <unknown>
+#14 0x5563c638386f <unknown>
+#15 0x5563c63da668 <unknown>
+#16 0x5563c63da832 <unknown>
+#17 0x5563c63ea65c <unknown>
+#18 0x7f02bb933a94 <unknown>
+#19 0x7f02bb9c0a34 __clone
