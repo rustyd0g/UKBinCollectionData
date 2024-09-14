@@ -1,0 +1,25 @@
+Running test for council: BuckinghamshireCouncil
+An error occurred: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="COPYOFECHOCOLLECTIONDATES_ADDRESSSELECTION_ADDRESSSELECTIONPOSTCODE"]"}
+  (Session info: chrome=128.0.6613.119); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x55c94040786a <unknown>
+#1 0x55c9400d5e50 <unknown>
+#2 0x55c940125644 <unknown>
+#3 0x55c940125931 <unknown>
+#4 0x55c94016b534 <unknown>
+#5 0x55c94014a4bd <unknown>
+#6 0x55c9401689c6 <unknown>
+#7 0x55c94014a233 <unknown>
+#8 0x55c940118093 <unknown>
+#9 0x55c94011909e <unknown>
+#10 0x55c9403ceacb <unknown>
+#11 0x55c9403d2a81 <unknown>
+#12 0x55c9403ba695 <unknown>
+#13 0x55c9403d35f2 <unknown>
+#14 0x55c94039f86f <unknown>
+#15 0x55c9403f6668 <unknown>
+#16 0x55c9403f6832 <unknown>
+#17 0x55c94040665c <unknown>
+#18 0x7f1953a78a94 <unknown>
+#19 0x7f1953b05a34 __clone
+
