@@ -1,0 +1,24 @@
+Running test for council: RenfrewshireCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x5648adcad13a <unknown>
+#1 0x5648ad9935e0 <unknown>
+#2 0x5648ad9e2be8 <unknown>
+#3 0x5648ad9e2e81 <unknown>
+#4 0x5648ada298c4 <unknown>
+#5 0x5648ada07b4d <unknown>
+#6 0x5648ada26d7d <unknown>
+#7 0x5648ada078c3 <unknown>
+#8 0x5648ad9d56b3 <unknown>
+#9 0x5648ad9d668e <unknown>
+#10 0x5648adc77b3b <unknown>
+#11 0x5648adc7bac1 <unknown>
+#12 0x5648adc64335 <unknown>
+#13 0x5648adc7c642 <unknown>
+#14 0x5648adc4949f <unknown>
+#15 0x5648adc9c038 <unknown>
+#16 0x5648adc9c203 <unknown>
+#17 0x5648adcabf8c <unknown>
+#18 0x7f2758c02a94 <unknown>
+#19 0x7f2758c8fa34 __clone
+
