@@ -1,0 +1,24 @@
+ERROR    root:WychavonDistrictCouncil.py:151 An error occurred: Message: element not interactable
+  (Session info: chrome=129.0.6668.58)
+Stacktrace:
+#0 0x5558ec5b513a <unknown>
+#1 0x5558ec29b43d <unknown>
+#2 0x5558ec2e4b48 <unknown>
+#3 0x5558ec2e2fc1 <unknown>
+#4 0x5558ec30fb22 <unknown>
+#5 0x5558ec2df478 <unknown>
+#6 0x5558ec30fcee <unknown>
+#7 0x5558ec32ed7d <unknown>
+#8 0x5558ec30f8c3 <unknown>
+#9 0x5558ec2dd6b3 <unknown>
+#10 0x5558ec2de68e <unknown>
+#11 0x5558ec57fb3b <unknown>
+#12 0x5558ec583ac1 <unknown>
+#13 0x5558ec56c335 <unknown>
+#14 0x5558ec584642 <unknown>
+#15 0x5558ec55149f <unknown>
+#16 0x5558ec5a4038 <unknown>
+#17 0x5558ec5a4203 <unknown>
+#18 0x5558ec5b3f8c <unknown>
+#19 0x7fad56f09a94 <unknown>
+#20 0x7fad56f96a34 __clone
