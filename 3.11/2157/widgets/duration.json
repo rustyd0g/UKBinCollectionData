@@ -1,0 +1,1 @@
+[{"uid":"9ba1dc49fe34dcc7","name":"Validate Council Output [GatesheadCouncil]","time":{"start":1728057195403,"stop":1728057499588,"duration":304185},"status":"failed","severity":"normal"},{"uid":"1a5c5e9c27c4e59c","name":"Validate Council Output [DorsetCouncil]","time":{"start":1728057195402,"stop":1728057197915,"duration":2513},"status":"passed","severity":"normal"}]
