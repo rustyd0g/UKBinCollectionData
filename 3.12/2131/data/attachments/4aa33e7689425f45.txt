@@ -1,3 +1,0 @@
-Running test for council: GloucesterCityCouncil
-An error occurred: Message: 
-
