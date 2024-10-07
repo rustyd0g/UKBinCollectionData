@@ -1,0 +1,24 @@
+Running test for council: BexleyCouncil
+An error occurred: Message: 
+Stacktrace:
+#0 0x55779dd3913a <unknown>
+#1 0x55779da1f5e0 <unknown>
+#2 0x55779da6ebe8 <unknown>
+#3 0x55779da6ee81 <unknown>
+#4 0x55779dab58c4 <unknown>
+#5 0x55779da93b4d <unknown>
+#6 0x55779dab2d7d <unknown>
+#7 0x55779da938c3 <unknown>
+#8 0x55779da616b3 <unknown>
+#9 0x55779da6268e <unknown>
+#10 0x55779dd03b3b <unknown>
+#11 0x55779dd07ac1 <unknown>
+#12 0x55779dcf0335 <unknown>
+#13 0x55779dd08642 <unknown>
+#14 0x55779dcd549f <unknown>
+#15 0x55779dd28038 <unknown>
+#16 0x55779dd28203 <unknown>
+#17 0x55779dd37f8c <unknown>
+#18 0x7f9e96f91a94 <unknown>
+#19 0x7f9e9701ea34 __clone
+
