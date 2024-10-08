@@ -1,3 +1,0 @@
-Running test for council: BracknellForestCouncil
-Exception encountered: Invalid house number
-Please check the provided house number.
