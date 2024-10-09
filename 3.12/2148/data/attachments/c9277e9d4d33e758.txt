@@ -1,2 +1,0 @@
-Running test for council: BarnetCouncil
-An error occurred: cannot access local variable 'addr_option' where it is not associated with a value
