@@ -1747,13 +1747,10 @@
     },
     "MidlothianCouncil": {
         "LAD24CD": "S12000019",
-        "house_number": "52",
-        "postcode": "EH19 2EB",
         "skip_get_url": true,
-        "url": "https://www.midlothian.gov.uk/info/1054/bins_and_recycling/343/bin_collection_days",
-        "web_driver": "http://selenium:4444",
-        "wiki_name": "Midlothian",
-        "wiki_note": "Pass the house name/number wrapped in double quotes along with the postcode parameter."
+        "uprn": "120013172",
+        "url": "https://my.midlothian.gov.uk/service/Bin_Collection_Dates",
+        "wiki_name": "Midlothian"
     },
     "MiltonKeynesCityCouncil": {
         "LAD24CD": "E06000042",
