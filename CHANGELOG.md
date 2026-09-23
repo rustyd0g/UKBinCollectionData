@@ -1,4 +1,48 @@
 =======
+## 0.172.3 (2026-09-05)
+
+### Fix
+
+- **buckinghamshire**: move to the council's current form-engine endpoints
+
+## 0.172.2 (2026-09-03)
+
+### Fix
+
+- **councils**: fix 4 real bugs found triaging PR #2222's full CI run
+
+## 0.172.1 (2026-09-03)
+
+### Fix
+
+- **deps**: bump pytest-asyncio to unblock pytest 9, closing the rest of Dependabot's open alerts
+- **ci**: make Poetry actually target the setup-python interpreter
+- **deps**: keep HA back-compat to 2023.10.0, scope homeassistant fixtures out of root conftest
+- **deps**: bump homeassistant dev dependency to clear cryptography CVEs (#2221)
+
+## 0.172.0 (2026-09-03)
+
+### Feat
+
+- Improve SocietyWorks backend councils.
+
+### Fix
+
+- **gravesham**: support postcode + house number, not just UPRN (#2182)
+- **hinckley-bosworth**: rewrite for the site's new HTML-based dates page (#2191)
+- **south-oxfordshire**: split combined bin sentence into separate entries (#2197)
+- **newark-sherwood**: PID alone is sufficient, fix stale table selector (#2202)
+- **midlothian**: settle before typing into the postcode field (#2212)
+- **vale-of-white-horse**: roll stale dates forward by the fortnight (#2213)
+- **canterbury**: detect API 403 as an outage, raise a clear error (#2215)
+- **woking**: collect every collection row, not just the first (#2216)
+- **ci**: exclude shared base modules from the council/JSON parity check
+- **gateshead**: rewrite as pure HTTP, no browser (#2217)
+- **highpeak**: switch to Agenda view to avoid Month-view cutoff (#2218)
+- **testvalley**: stop stripping ordinal suffixes, none remain in dates
+- **societyworks**: guard missing Location header, anchor address match
+- [Dumfries] do not download iCal file twice.
+
 ## 0.171.3 (2026-08-03)
 
 ### Fix
