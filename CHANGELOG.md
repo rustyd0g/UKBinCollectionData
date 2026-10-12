@@ -1,4 +1,24 @@
 =======
+## 0.172.5 (2026-09-24)
+
+### Fix
+
+- **south-lanarkshire**: parse the new XFP form's bin collection table
+- **ci**: wait for PyPI to index before the release Docker build
+
+## 0.172.4 (2026-09-24)
+
+### Fix
+
+- **exeter**: send realistic browser headers on the address-finder request
+- **sunderland**: send a full realistic header set alongside TLS impersonation
+- **canterbury**: use the API's prod stage instead of the retired Beta stage
+- **solihull**: handle bin cards with no collection history
+- **ha**: redact household and endpoint values from config-flow diagnostics
+- **bolsover**: use a continuous fortnight index for bin parity, not a relative week number
+- **sunderland**: use curl_cffi to pass Cloudflare's TLS fingerprint challenge
+- **vale-of-white-horse**: don't infer a collection date into a bank holiday or Christmas week
+
 ## 0.172.3 (2026-09-05)
 
 ### Fix
