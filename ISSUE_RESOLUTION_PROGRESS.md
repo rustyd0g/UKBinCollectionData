@@ -538,3 +538,291 @@ investigated), ForestOfDeanDistrictCouncil (Selenium, empty bins, not yet invest
 | #1986 | Mid Suffolk | Enhancement | Expose additional future collection dates |
 | #1784 | Selenium Addon Removed | HA ecosystem | Not a code bug - HA's Selenium add-on repo was removed; needs a docs/wiki note about running `selenium/standalone-chrome` via Docker instead |
 | #1560 | Gateshead | Bug (wrong dates) | Now have a local Selenium grid available - worth revisiting next session |
+
+---
+
+## Local live-suite pass (2026-10-15, post-0.172.7)
+
+**First pass run from a UK residential connection rather than a cloud sandbox or a
+GitHub runner.** That alone changed the diagnosis for most of the "blocked in CI" list.
+
+### The numbers
+
+| Run | Result |
+|---|---|
+| `make unit-tests` equivalent | **339 passed, 0 failed**, coverage 82% |
+| Full live suite before the fixes, `-n 4 --local_browser True` | **325 passed, 27 failed** in 8m46s |
+| The 27 failures re-run serially | **3 passed, 24 failed** |
+| Full live suite **after** the fixes | **331 passed, 21 failed** in 8m20s |
+
+The three that only failed under `-n 4` were **ArunCouncil, StHelensBC and
+WealdenDistrictCouncil** - pure local concurrency noise, no action. Always re-run
+failures serially before believing them (playbook 9a).
+
+The postcode and webdriver unit tests that only ever failed in the sandbox
+(`test_check_postcode_valid`, `test_check_postcode_invalid`,
+`test_create_webdriver_local`) all pass here, as expected.
+
+### Headline finding: "Cloudflare IP block" was mostly a client fingerprint problem
+
+37 councils on the post-0.172.7 CI blocked list **pass locally untouched**, so those
+really are CI-network-only and should be left alone. But the ones that failed locally
+too were mostly not failing for the reason recorded:
+
+- **Real Chrome passes Cloudflare cleanly from here, headless or not.** Boston,
+  Chichester, Stockton-on-Tees, East Lindsey and East Renfrewshire all loaded their bin
+  pages with no challenge at all when driven by a browser whose User-Agent matched
+  itself.
+- The scrapers' **hardcoded User-Agent strings** were the tell: they claim a stale
+  Chrome version (`Chrome/138`, now 154) and almost all claim `X11; Linux x86_64`
+  whatever OS they run on. Cloudflare compares both against what the browser's own
+  JavaScript reports and serves "Just a moment..." on the mismatch - and on GOSS iCM
+  sites it does so on the **form POST**, not the first page load. The scraper therefore
+  got through the postcode step and timed out waiting for the address dropdown, which
+  looked exactly like a selector change. Fixed centrally in `create_webdriver`.
+- Several "Azure App Gateway 403" councils simply needed a non-default User-Agent on a
+  plain `requests` call - Herefordshire 403s with `python-requests/...` and 200s with
+  `get_scraper_user_agent()`.
+
+### Fixed this pass
+
+| Council | Root cause | Fix |
+|---|---|---|
+| **HerefordshireCouncil** | Azure App Gateway 403s the default `python-requests` UA; the scraper then reported "Address/UPRN not found", blaming the user's UPRN | send `get_scraper_user_agent()`; raise a named `ConnectionError` on a 403 |
+| **TeignbridgeCouncil** | `/repositories/hidden-pages/bin-finder` 404s. The scraper parsed the 404 page and died with `IndexError: list index out of range` | follow the site's own lookup to `/umbraco/surface/bincollection/GetCollections?uprn=`; drops Selenium entirely; input.json loses `web_driver` and the "pass Google as the URL" workaround |
+| **BostonBoroughCouncil**, **GreatYarmouthBoroughCouncil** | stale/wrong UA triggered Cloudflare on the form POST | `align_user_agent_to_browser()` in `create_webdriver` |
+| **BroxbourneCouncil** (error quality only) | its lookup was down for several hours, and `select_by_value` raised "Cannot locate option with value: 148048608", which reads as stale test data. Recovered the same day | detect the empty dropdown and name the council-side cause |
+
+### Still broken locally, with the actual cause
+
+| Council | Cause | Fixable in code? |
+|---|---|---|
+| ChichesterDistrictCouncil, EastLindseyDistrictCouncil, EastRenfrewshireCouncil, StocktonOnTeesCouncil | Cloudflare **Turnstile** - still challenged with a correctly-aligned UA and a real local Chrome. `ChichesterDistrictCouncil`'s own docstring already says it needs non-headless undetected-chromedriver | needs a stealth-driver decision, not a selector fix |
+| TorfaenCouncil | `iportal.itouchvision.com` returns a bare **403 Forbidden** to the browser mid-flow | no |
+| AshfieldDistrictCouncil | the council's own bundled JS throws; the page never leaves the spinner in a real browser | no |
+| HaltonBoroughCouncil | Google serves a **reCAPTCHA** challenge to the automated browser; the scraper already reports this clearly | no |
+| EastHampshireDC | `maps.easthants.gov.uk` TLS certificate **expired**. Never disable verification | no |
+| HorshamDistrictCouncil | `satellite.horsham.gov.uk` resets the connection; `curl_cffi` gets a 500 | no |
+| GedlingBoroughCouncil | `api.gbcbincalendars.co.uk` read-times-out at 30s | no |
+| CanterburyCityCouncil | API 403 - the known outage (#2215); the scraper's outage error works as designed | no |
+| SwanseaCouncil | `www1.swansea.gov.uk` 502s - draft PR #2252 | no |
+| FyldeCouncil | portal is login-only now | retire? (decision) |
+| **DoncasterCouncil** | **new**: `/Compass/PremiseDetail/GetCollectionsForCalendar` now redirects to an ASP.NET error page and `/Compass/Entity/Launch/D3/` says "Nothing To Display". Migrated to `doncaster-wasterecycling.oncreate.app/w/webpage/bin-query`, a JS-rendered Granicus/oncreate app | rewrite (decision - changes inputs from `uprn` to postcode + address, like `SevenoaksDistrictCouncil`) |
+| **IsleOfWightCouncil** | **new, and not a test-data problem**: the results page no longer contains a PDF calendar link at all. "View Collection Calendar" is now a `<button>` with a Blazor handler, so `soup.find("a", class_="download")` can never match. The ~300 lines of colour-coded PDF parsing have no source | rewrite (decision) |
+| RhonddaCynonTaffCouncil | collection page moved - open PR #2276 | in that PR |
+| NorthEastDerbyshireDistrictCouncil | no per-address lookup exists (#1881) | rewrite (decision) |
+| SouthendOnSeaCityCouncil, TamworthBoroughCouncil | genuinely stale test data - see below | yes, pending test-data sign-off |
+
+### Councils that pass locally but are blocked in CI (leave alone)
+
+BarkingDagenham, BrecklandCouncil, CastlepointDistrictCouncil, DacorumBoroughCouncil,
+DartfordBoroughCouncil, DumfriesandGallowayCouncil, EastDevonDC,
+EastStaffordshireBoroughCouncil, ExeterCityCouncil, GatesheadCouncil,
+HarrogateBoroughCouncil, InverclydeCouncil, IpswichBoroughCouncil, IslingtonCouncil,
+LancasterCityCouncil, LondonBoroughHammersmithandFulham, LondonBoroughHarrow,
+MidAndEastAntrimBoroughCouncil, MidSussexDistrictCouncil, NorthKestevenDistrictCouncil,
+NorthSomersetCouncil, NorthTynesideCouncil, NorwichCityCouncil, PowysCouncil,
+PrestonCityCouncil, SouthHamsDistrictCouncil, SouthHollandDistrictCouncil,
+SouthTynesideCouncil, SunderlandCityCouncil, TamesideMBCouncil, TonbridgeAndMallingBC,
+WalsallCouncil, WarringtonBoroughCouncil, WaverleyBoroughCouncil, WestBerkshireCouncil,
+WestDevonBoroughCouncil, WokingBoroughCouncil.
+
+Note **HarrogateBoroughCouncil passes locally** - `secure.harrogate.gov.uk/inmyarea`
+still answers, contrary to the CI note that its old site does not respond.
+
+### Test data in input.json
+
+- **TamworthBoroughCouncil**: the Lichfield shared portal identifies properties by a
+  **9-digit Bartec id** (e.g. `394007949`), not a 12-digit national UPRN. The fixture's
+  `100031767448` is a national UPRN, so it could never have matched - and `wiki_note`
+  telling users to get a UPRN from FindMyAddress is wrong for the same reason. The
+  portal's own lookup is `POST /bartec_ajax/<postcode>`, returning
+  `{"addresses":[{"uprn","label"}]}`. The fixture's `postcode` field is never read by
+  the scraper. Verified replacements: **Two Gates Working Mens Club, 6 Dosthill Road,
+  B77 1HU = `394007949`** (3 bin types) or **Anker Valley Primary School, Brooklime Way,
+  B79 0FD = `394043177`** (2).
+- **SouthendOnSeaCityCouncil**: the API has an undocumented address lookup,
+  `GET /addresses?postcode=`. Swept every Southend postcode: civic, museum and office
+  addresses all return null containers, so a non-residential fixture has to be a
+  community building. Verified: **St Cedds Church Hall, Bridgwater Drive,
+  Westcliff-on-Sea SS0 0DS = `010012148303`** (4 containers).
+- **IsleOfWightCouncil**: *not* a test-data problem. Swept 440 island postcodes for
+  community centres, church halls, libraries and scout huts - every one returns "no
+  waste collection details", so the tool is domestic-only and no non-residential fixture
+  exists. A working domestic address still fails one step later, on the missing PDF link.
+- **BroxbourneCouncil**: *not* a test-data problem either. For several hours its own
+  form returned only "My address was not found" for every postcode tried in a real
+  browser, including the EN11 8EH its page carries a workaround note for. It recovered
+  later the same day and EN8 7FL now returns its 18 real addresses, so input.json's
+  `148048608` was valid throughout. A transient council-side outage, now reported as
+  one rather than as "Cannot locate option with value".
+
+### Regression check on the shared `create_webdriver` change
+
+The UA change touches every Selenium council, so the full live suite was re-run after
+it: **331 passed, 21 failed**, with 8 councils moving FAIL to PASS (Arun, Boston,
+Broxbourne, Great Yarmouth, Herefordshire, St Helens, Teignbridge, Wealden) and two
+moving PASS to FAIL - **CeredigionCountyCouncil** and **GloucesterCityCouncil**.
+
+Both were A/B'd three runs each with UA alignment on and off, and neither is caused by
+it:
+
+- **Gloucester**: 2/3 with the change, 2/3 without. `select_by_value` intermittently
+  runs before the address dropdown is fully populated -> "Cannot locate option with
+  value: 100120479507". Pre-existing flakiness, worth its own fix.
+- **Ceredigion**: 0/3 with the change, 0/3 without, failing on the 10s wait for
+  `//a[contains(text(), 'Postcode Search')]`. It passed earlier the same day, and the
+  link is still in the page's static HTML, so this is a fresh rendering or
+  cookie-banner-interception problem rather than a renamed selector. Needs its own
+  investigation.
+
+### Consolidated into one release
+
+Fylde's retirement and the North East Derbyshire, Isle of Wight and Doncaster rewrites
+were each developed as their own PR (#2279, #2280, #2281, #2282) and then cherry-picked
+into #2277, because `bump.yml` runs on every master push and five merges would have cut
+five releases. All four originals were closed pointing at #2277. The squash title must
+carry the breaking change marker (`fix!:`), or the reconfiguration requirements for
+North East Derbyshire and Doncaster won't reach the changelog.
+
+Two of those came back with better answers than the triage expected, which is worth
+remembering before writing a council off:
+
+- **Isle of Wight** was rewritten rather than retired. The calendar PDF still exists;
+  its URL lives inside the Blazor circuit and is reachable by hooking the anchor click,
+  so the colour-coded PDF parsing survived. A non-residential fixture also turned out to
+  exist (Orme House Nursery, PO30 1JW) - the 440-postcode sweep above missed it only
+  because the keyword filter didn't include "nursery". Treat that sweep's conclusion as
+  a limit of the filter, not of the island.
+- **Doncaster**'s first fixture was `3, Sandown Gardens, Cantley, DN4 6HN`, a dwelling.
+  Caught in review and replaced with The Laurels Nursing Home, Norton, DN6 9EU. Worth
+  checking explicitly whenever a council moves from a UPRN to a postcode-plus-address
+  lookup: a bare UPRN is far less identifying than a printed street address, so the
+  switch quietly raises the privacy stakes of the fixture.
+
+Doncaster returns two past-dated collections among its 15. Harmless: the integration's
+`process_bin_data` keeps only `collection_date >= current_date`. 11 councils filter at
+the scraper instead; this one doesn't.
+
+### Incidental findings
+
+- 14 councils carry a stale `web_driver` in input.json without calling
+  `create_webdriver`: Bexley, BromleyBorough, ChelmsfordCity, EastRiding,
+  EppingForestDistrict, KingstonUponThames, NorthWarwickshireBorough, PeterboroughCity,
+  RugbyBorough, SouthHollandDistrict, Stirling, WindsorAndMaidenhead, Wirral,
+  WokinghamBorough. Harmless to the scrapers, but it makes the HA config flow ask for a
+  Selenium URL that is never used. Left alone deliberately - a 14-council input.json
+  commit is the kind of sprawl the playbook warns against.
+- `black .` silently checks almost nothing here: `.gitignore` opens with `*` and
+  re-includes only file patterns, never directories, so black skips every
+  subdirectory and sees two root-level files. Pass changed files explicitly.
+  `bin_to_ics.py` is already unformatted on master.
+- Boston is **intermittent** rather than cleanly fixed: 6 passes to 1 failure observed
+  after the User-Agent change, against a consistent failure before it. Cloudflare still
+  challenges it occasionally.
+- `check_selenium_url_in_input.json.py` reads from the GitHub API and prints nothing but
+  an empty table when rate-limited, so it can silently pass without checking anything.
+  Offline equivalent added to the playbook (9a).
+
+---
+
+## Releases 0.173.0, 0.173.1 and 0.173.2 (2026-10-15/16)
+
+Continuation of the local live-suite pass above. Three releases in two days, all
+driven from the full live suite run on a UK residential connection.
+
+### Where the council list ended up
+
+| | councils | pass | fail |
+|---|---|---|---|
+| start of the pass (0.172.7) | 352 | 325 | 27 (24 after serial re-check) |
+| after 0.173.1 | 351 | 335 | 16 (10 after serial re-check) |
+| after 0.173.2 | 351 | **341** | **10** |
+
+The ten still failing are all council-side or in someone else's PR: Ashfield (the
+council's own JS throws), Canterbury (#2215), Gedling (API read timeouts), Halton
+(reCAPTCHA), Horsham (connection resets), **Neath Port Talbot** (new - the council has
+withdrawn its bin day finder; its page now says to use myNPT), **Newark and Sherwood**
+(new - intermittent ASP.NET error page, passed one serial re-run and failed the next),
+Rhondda Cynon Taff (#2276) and Swansea (#2252), plus Torfaen (itouchvision 403).
+
+**No scraper bugs remain on the list.**
+
+### 0.173.0 - the big one
+
+Herefordshire, Teignbridge, Boston, Great Yarmouth; Fylde retired; North East
+Derbyshire, Isle of Wight and Doncaster rewritten; Southend and Tamworth test data
+replaced. Detail in the section above.
+
+Five PRs (#2279, #2280, #2281, #2282) were consolidated into #2277 before merging,
+because `bump.yml` fires on every master push and five merges would have cut five
+releases. That pattern - develop separately, cherry-pick into one PR, close the
+originals with a pointer - is now the house style for a multi-council pass.
+
+### 0.173.1 - Ceredigion, Gloucester, and the Turnstile four
+
+- **Ceredigion**: the council wrapped the "Postcode Search" link's label in a `<span>`.
+  XPath's `text()` selects only an element's *own* direct text nodes, so
+  `contains(text(), 'Postcode Search')` stopped matching an anchor whose text was
+  plainly on the page, and the scraper timed out on a 10s wait. Now matched on the form
+  id in the href, which also survives the Welsh label. 0/3 runs -> 2/2.
+- **Gloucester**: the address `<select>` is present and clickable before its options
+  arrive, so a fixed `sleep(2)` raced the data and roughly one run in three died with
+  "Cannot locate option with value". Waits for the option itself now. 2/3 -> 5/5.
+- **Chichester, East Lindsey, East Renfrewshire, Stockton-on-Tees**: Cloudflare
+  Turnstile. `create_webdriver` gained an opt-in `stealth` flag using
+  undetected-chromedriver where a visible browser window is available. Verified live on
+  all four, with no changes to the scrapers' own logic - only the driver.
+
+  **This does not help Home Assistant users.** It needs a real Chrome window: the CLI or
+  API server on a desktop, or a Linux server with Xvfb. It does *not* work through the
+  remote headless Selenium grid the HA add-on provides. Each council's `wiki_note` says
+  so, and #2249 was told the same rather than being closed.
+
+  It also collapsed `MidlothianCouncil`'s inline copy of the same trick, which pinned
+  `version_main=146` and had stopped starting once Chrome passed 146.
+
+### 0.173.2 - East Hampshire
+
+`maps.easthants.gov.uk`'s TLS certificate has been **renewed** (valid to May 2027), so
+the SSL failure that had this council written off as unfixable is gone. Behind it was a
+PDF parser that never worked: the calendar is four month columns side by side, so one
+line of extracted text holds days for four different months under a header reading
+"OCT 2025 JAN 2026 APR 2026 JUL 2026". The parser read line by line and took the first
+month it matched, iterating a dict that starts at JAN, so every day in the block was
+filed under January - and the year was stamped as `datetime.now().year` regardless.
+57 dates, 52 of them in Jan-Mar, none in the future, so zero bins.
+
+Now parses the layout by position and takes the bin type from the colour of the cell
+each day number sits on, which is the only place the PDF says which bin goes out.
+Also removed a hardcoded `"/home/mark/pdf-scrapers/easthants"` cache path.
+
+**Lesson worth keeping: a council written off for an environmental reason is worth
+re-checking.** Certificates get renewed, outages end. Broxbourne's address lookup was
+stone dead for several hours in the same pass and had recovered by the afternoon.
+
+### Things that bit, and are worth remembering
+
+- **Stale hardcoded User-Agents were most of the "Cloudflare IP block" list.** Covered
+  in the section above and in playbook 9b. Chrome updated 154 -> 155 on the test machine
+  *during* this pass and the new alignment tracked it automatically, which is as good a
+  demonstration as any of why the old hardcoded strings rot.
+- **The parallel suite lies.** Always re-run failures serially. Flakes rose from 3 to 6
+  after the stealth work landed, plausibly because four non-headless Chrome windows now
+  open partway through an `-n 4` run. If a run looks unusually bad, deselect the five
+  Turnstile councils first.
+- **`black .` checks almost nothing here** - `.gitignore` opens with `*` and re-includes
+  only file patterns, never directories. Pass changed files explicitly. See playbook 9.
+- **codecov/patch is the one to read.** A failing `codecov/project` can be a fair
+  consequence of adding Selenium lines; a failing `codecov/patch` means the code you
+  just wrote isn't tested. It caught exactly that on the East Hampshire rewrite, where
+  only the pure parsing function had tests and the whole network-facing half didn't.
+- **PyPI's JSON API updates before the `simple` index pip reads.** `release.yml`'s
+  propagation wait polled the JSON API, so it declared 0.173.2 live and the Docker build
+  then failed to install the version it had just confirmed - twice. Fixed to poll pip
+  itself. PyPI, the GitHub release and the tag were all fine throughout; only the Docker
+  image was delayed.
+- **Merging is the one step that needs the maintainer.** `master` requires one approving
+  review and PRs are opened under the maintainer's own account, so they can never
+  self-approve; every release this pass needed either the GitHub UI or an admin
+  override.

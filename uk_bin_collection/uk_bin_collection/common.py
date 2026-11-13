@@ -2,6 +2,7 @@ import calendar
 import json
 import os
 import re
+import sys
 from datetime import datetime, timedelta
 from enum import Enum
 from importlib.metadata import PackageNotFoundError, version as _pkg_version
@@ -56,43 +57,33 @@ def check_paon(paon: str):
     """
     Checks that PAON data exists
         :param paon: PAON data to check, usually house number
+        :raises ValueError: if no house number was provided
     """
-    try:
-        if paon is None:
-            raise ValueError("Invalid house number")
-        return True
-    except Exception as ex:
-        print(f"Exception encountered: {ex}")
-        print("Please check the provided house number.")
-        exit(1)
+    if paon is None or paon == "":
+        raise ValueError("Invalid house number. Please check the provided PAON.")
+    return True
 
 
 def check_uprn(uprn: str):
     """
     Checks that the UPRN exists
         :param uprn: UPRN to check
+        :raises ValueError: if no UPRN was provided
     """
-    try:
-        if uprn is None or uprn == "":
-            raise ValueError("Invalid UPRN")
-        return True
-    except Exception as ex:
-        print(f"Exception encountered: {ex}")
-        print("Please check the provided UPRN.")
+    if uprn is None or uprn == "":
+        raise ValueError("Invalid UPRN. Please check the provided UPRN.")
+    return True
 
 
 def check_usrn(usrn: str):
     """
     Checks that the USRN exists
-        :param uprn: USRN to check
+        :param usrn: USRN to check
+        :raises ValueError: if no USRN was provided
     """
-    try:
-        if usrn is None or usrn == "":
-            raise ValueError("Invalid USRN")
-        return True
-    except Exception as ex:
-        print(f"Exception encountered: {ex}")
-        print("Please check the provided USRN.")
+    if usrn is None or usrn == "":
+        raise ValueError("Invalid USRN. Please check the provided USRN.")
+    return True
 
 
 def get_date_with_ordinal(date_number: int) -> str:
@@ -361,11 +352,151 @@ def contains_date(string, fuzzy=False) -> bool:
         return False
 
 
+_local_chrome_major: str = ""
+
+
+def get_local_chrome_major_version() -> str:
+    """
+    Return the major version of the locally installed Chrome, e.g. "154", or an
+    empty string if it can't be determined. Cached, since the lookup shells out
+    to the OS and every council in a run would otherwise repeat it.
+    """
+    global _local_chrome_major
+    if _local_chrome_major == "":
+        try:
+            from webdriver_manager.core.os_manager import (
+                ChromeType,
+                OperationSystemManager,
+            )
+
+            full = OperationSystemManager().get_browser_version_from_os(
+                ChromeType.GOOGLE
+            )
+            _local_chrome_major = (full or "").split(".")[0]
+        except Exception:
+            _local_chrome_major = None
+    return _local_chrome_major or ""
+
+
+#         sys.platform prefix -> the platform token real Chrome sends there
+_UA_PLATFORM_TOKENS = (
+    ("win", "Windows NT 10.0; Win64; x64"),
+    ("darwin", "Macintosh; Intel Mac OS X 10_15_7"),
+    ("linux", "X11; Linux x86_64"),
+)
+
+
+def get_local_ua_platform_token() -> str:
+    """
+    Return the User-Agent platform token real Chrome sends on this OS, e.g.
+    "Windows NT 10.0; Win64; x64", or an empty string for an OS we don't map.
+    """
+    for prefix, token in _UA_PLATFORM_TOKENS:
+        if sys.platform.startswith(prefix):
+            return token
+    return ""
+
+
+def align_user_agent_to_browser(
+    user_agent: str, chrome_major: str, platform_token: str = ""
+) -> str:
+    """
+    Rewrite a user agent's Chrome major version and platform token so they
+    match the browser that will actually send them.
+
+    Councils' scrapers hardcode a User-Agent string, which goes stale as Chrome
+    moves on and is wrong on any OS but the author's. Cloudflare's bot
+    management compares the claimed values against what the browser's own
+    JavaScript reports, so announcing "Chrome/134" from a Chrome 154 binary, or
+    "X11; Linux x86_64" from Windows, earns an endless "Just a moment..."
+    interstitial - the exact symptom that looked like a CI-only IP block. GOSS
+    iCM councils serve it on the form POST rather than the first page load,
+    which made it look like a selector change instead.
+
+        :param user_agent: The User-Agent the caller asked for
+        :param chrome_major: Major version of the real browser, e.g. "154"
+        :param platform_token: The real platform token, e.g. "Windows NT 10.0; Win64; x64"
+        :return: The user agent realigned to the real browser
+    """
+    if not user_agent:
+        return user_agent
+    if chrome_major:
+        user_agent = re.sub(
+            r"\b(Chrome|Edg)/(\d+)\b",
+            lambda m: f"{m.group(1)}/{chrome_major}",
+            user_agent,
+        )
+    if platform_token:
+        user_agent = re.sub(
+            r"^(Mozilla/[\d.]+ )\(([^)]*)\)",
+            lambda m: f"{m.group(1)}({platform_token})",
+            user_agent,
+        )
+    return user_agent
+
+
+def has_local_display() -> bool:
+    """
+    Whether a real (non-headless) browser window can be opened here.
+
+    Windows and macOS always have a desktop. On Linux, a window needs an X or
+    Wayland display - which on a server means something like Xvfb being set up
+    and exported.
+    """
+    if sys.platform.startswith(("win", "darwin")):
+        return True
+    return bool(os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY"))
+
+
+def create_stealth_webdriver(user_agent: str = None):
+    """
+    Create a non-headless undetected-chromedriver browser, or None if that
+    isn't possible here.
+
+    A handful of councils front their bin-day checkers with Cloudflare
+    Turnstile, which plain ChromeDriver cannot satisfy however its flags and
+    User-Agent are dressed up - the challenge is served on the form POST and
+    never clears. undetected-chromedriver patches the driver binary itself and
+    does get through, but only with a real browser window, so it needs a
+    display (see has_local_display).
+
+    Returns None rather than raising, so callers can fall back to the ordinary
+    driver and fail with their own diagnostics instead of an import error.
+
+        :param user_agent: Optional custom user agent string
+    """
+    if not has_local_display():
+        return None
+    try:
+        import undetected_chromedriver as uc
+    except ImportError:
+        return None
+
+    options = uc.ChromeOptions()
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1920,1080")
+    if user_agent:
+        options.add_argument(
+            f"--user-agent="
+            f"{align_user_agent_to_browser(user_agent, get_local_chrome_major_version(), get_local_ua_platform_token())}"
+        )
+    try:
+        # No version_main: undetected-chromedriver detects the installed
+        # Chrome itself. Pinning it, as MidlothianCouncil used to, goes stale
+        # the moment Chrome updates and stops the driver starting at all.
+        return uc.Chrome(options=options)
+    except Exception as e:
+        print(f"Could not start undetected-chromedriver, falling back: {e}")
+        return None
+
+
 def create_webdriver(
     web_driver: str = None,
     headless: bool = True,
     user_agent: str = None,
     session_name: str = None,
+    stealth: bool = False,
 ) -> webdriver.Chrome:
     """
     Create and return a Chrome WebDriver configured for optional headless operation.
@@ -374,9 +505,16 @@ def create_webdriver(
     :param headless: Whether to run the browser in headless mode.
     :param user_agent: Optional custom user agent string.
     :param session_name: Optional custom session name string.
+    :param stealth: Prefer a non-headless undetected-chromedriver browser, for
+        councils behind Cloudflare Turnstile. Only applies to a local driver
+        with a display available; falls back to the ordinary driver otherwise.
     :return: An instance of a Chrome WebDriver.
     :raises WebDriverException: If the WebDriver cannot be created.
     """
+    if stealth and not web_driver:
+        stealth_driver = create_stealth_webdriver(user_agent)
+        if stealth_driver is not None:
+            return stealth_driver
     options = webdriver.ChromeOptions()
     if headless:
         options.add_argument("--headless")
@@ -386,8 +524,25 @@ def create_webdriver(
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     if user_agent:
+        # Only the local browser's version is knowable up front; a remote grid's
+        # Chrome is whatever the image ships, so leave that caller's UA alone.
+        if not web_driver:
+            user_agent = align_user_agent_to_browser(
+                user_agent,
+                get_local_chrome_major_version(),
+                get_local_ua_platform_token(),
+            )
         options.add_argument(f"--user-agent={user_agent}")
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    # Some council sites have started fronting their bin-day checkers with
+    # Cloudflare's bot management, which can flag the automation tells
+    # ChromeDriver otherwise leaves in place (navigator.webdriver, the
+    # "Chrome is being controlled by automated test software" banner) even
+    # for a real, non-headless-detected browser.
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option(
+        "excludeSwitches", ["enable-logging", "enable-automation"]
+    )
+    options.add_experimental_option("useAutomationExtension", False)
     if session_name and web_driver:
         options.set_capability("se:name", session_name)
 

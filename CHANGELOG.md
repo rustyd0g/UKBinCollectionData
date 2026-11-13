@@ -1,4 +1,79 @@
 =======
+## 0.173.5 (2026-10-17)
+
+### Fix
+
+- **common**: raise instead of exiting when a PAON, UPRN or USRN is missing (#2291)
+
+## 0.173.4 (2026-10-17)
+
+### Fix
+
+- **swansea**: follow the council's move to the new GOSS collection search
+
+## 0.173.3 (2026-10-16)
+
+### Fix
+
+- **rhondda-cynon-taff**: follow the council page move
+
+## 0.173.2 (2026-10-16)
+
+### Fix
+
+- **east-hampshire**: read the calendar's four month columns correctly
+
+## 0.173.1 (2026-10-15)
+
+### Fix
+
+- **common**: add an opt-in stealth driver for Cloudflare Turnstile councils
+- **gloucester**: wait for the address option, not a fixed two seconds
+- **ceredigion**: match the postcode link by href, not by text()
+
+## 0.173.0 (2026-10-15)
+
+### BREAKING CHANGE
+
+- the inputs change from uprn to postcode + house_number. The
+app's only entry point requires a postcode, and its address links carry a
+per-session Liberty Create record id rather than a UPRN, so a UPRN cannot be
+used to reach a property. Existing Home Assistant users must reconfigure the
+integration after the release that carries this.
+- a week-long range says which bins go out that week but
+not on which day, so the scraper now needs the user's area and their
+normal collection weekday rather than a uprn and postcode. Both are
+passed in the existing house_number field, e.g. "North, Monday" or
+"Clay Cross, Friday", following the OrkneyIslandsCouncil precedent for a
+non-address value in that field; nothing in collect_data.py or the Home
+Assistant config flow needs new plumbing. Existing users must
+reconfigure. input.json drops uprn, postcode and web_driver in the same
+commit.
+
+### Fix
+
+- **doncaster**: rewrite onto the council's OnCreate waste app
+- **isle-of-wight**: read the calendar PDF URL out of the Blazor circuit
+- **north-east-derbyshire**: parse the published area calendars
+- retire FyldeCouncil, now behind a login-only waste portal
+- **input.json**: replace unusable Southend and Tamworth test data
+- **broxbourne**: name a council-side empty address lookup in the error
+- **common**: align Selenium User-Agent with the browser actually running
+- **teignbridge**: follow the bin lookup to its new endpoint, drop Selenium
+- **herefordshire**: send a real User-Agent past the Azure gateway
+
+## 0.172.7 (2026-10-15)
+
+### Fix
+
+- repair 8 councils (Armagh, Knowsley, Portsmouth, Hillingdon, Torbay, Orkney, High Peak, Staffs Moorlands)
+
+## 0.172.6 (2026-10-15)
+
+### Fix
+
+- **ci**: skip version bump when no commits are releasable; add maintainer playbook
+
 ## 0.172.5 (2026-09-24)
 
 ### Fix

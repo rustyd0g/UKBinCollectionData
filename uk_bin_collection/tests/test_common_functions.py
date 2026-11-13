@@ -29,14 +29,18 @@ def test_check_paon():
     assert result is True
 
 
-def test_check_paon_invalid(capfd):
-    invalid_house_num = None
-    with pytest.raises(SystemExit) as exc_info:
-        result = check_paon(invalid_house_num)
+@pytest.mark.parametrize("invalid_house_num", [None, ""])
+def test_check_paon_invalid(invalid_house_num, capfd):
+    """A missing house number raises, rather than terminating the process.
+
+    The Home Assistant integration runs the scraper in-process, so an `exit()`
+    here took the update coroutine down instead of surfacing a config error.
+    """
+    with pytest.raises(ValueError) as exc_info:
+        check_paon(invalid_house_num)
+    assert "Invalid house number" in str(exc_info.value)
     out, err = capfd.readouterr()
-    assert out.startswith("Exception encountered: Invalid house number")
-    assert exc_info.type == SystemExit
-    assert exc_info.value.code == 1
+    assert out == ""
 
 
 def test_get_data_check_uprn():
@@ -45,11 +49,14 @@ def test_get_data_check_uprn():
     assert result is True
 
 
-def test_get_data_check_uprn_exception(capfd):
-    uprn = None
-    result = check_uprn(uprn)
+@pytest.mark.parametrize("uprn", [None, ""])
+def test_get_data_check_uprn_exception(uprn, capfd):
+    """A missing UPRN raises, rather than printing and returning None."""
+    with pytest.raises(ValueError) as exc_info:
+        check_uprn(uprn)
+    assert "Invalid UPRN" in str(exc_info.value)
     out, err = capfd.readouterr()
-    assert out.startswith("Exception encountered: ")
+    assert out == ""
 
 
 def test_get_data_check_usrn():
@@ -58,11 +65,14 @@ def test_get_data_check_usrn():
     assert result is True
 
 
-def test_get_data_check_usrn_exception(capfd):
-    usrn = None
-    result = check_usrn(usrn)
+@pytest.mark.parametrize("usrn", [None, ""])
+def test_get_data_check_usrn_exception(usrn, capfd):
+    """A missing USRN raises, rather than printing and returning None."""
+    with pytest.raises(ValueError) as exc_info:
+        check_usrn(usrn)
+    assert "Invalid USRN" in str(exc_info.value)
     out, err = capfd.readouterr()
-    assert out.startswith("Exception encountered: ")
+    assert out == ""
 
 
 def test_get_date_with_ordinal():
@@ -510,3 +520,216 @@ def test_get_scraper_user_agent_custom_fallback():
     assert result == (
         "uk-bin-collection/dev (+https://github.com/robbrad/UKBinCollectionData)"
     )
+
+
+def test_align_user_agent_to_browser_rewrites_a_stale_chrome_version():
+    stale = (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+    )
+    assert align_user_agent_to_browser(stale, "154") == (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    )
+
+
+def test_align_user_agent_to_browser_leaves_a_matching_version_alone():
+    current = "Mozilla/5.0 Chrome/154.0.0.0 Safari/537.36"
+    assert align_user_agent_to_browser(current, "154") == current
+
+
+def test_align_user_agent_to_browser_rewrites_edge_too():
+    agent = "Mozilla/5.0 Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0"
+    assert align_user_agent_to_browser(agent, "154") == (
+        "Mozilla/5.0 Chrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+    )
+
+
+def test_align_user_agent_to_browser_does_not_touch_other_version_numbers():
+    agent = "Mozilla/5.0 AppleWebKit/537.36 Chrome/138.0.0.0 Safari/537.36"
+    aligned = align_user_agent_to_browser(agent, "154")
+    assert "AppleWebKit/537.36" in aligned
+    assert "Safari/537.36" in aligned
+
+
+@pytest.mark.parametrize("missing", [None, ""])
+def test_align_user_agent_to_browser_is_a_no_op_without_both_inputs(missing):
+    agent = "Mozilla/5.0 Chrome/138.0.0.0"
+    assert align_user_agent_to_browser(agent, missing) == agent
+    assert align_user_agent_to_browser(missing, "154") == missing
+
+
+def test_get_local_chrome_major_version_is_empty_when_undetectable():
+    import uk_bin_collection.common as common_module
+
+    original = common_module._local_chrome_major
+    try:
+        common_module._local_chrome_major = ""
+        with mock.patch(
+            "webdriver_manager.core.os_manager.OperationSystemManager."
+            "get_browser_version_from_os",
+            side_effect=OSError("no chrome here"),
+        ):
+            assert common_module.get_local_chrome_major_version() == ""
+    finally:
+        common_module._local_chrome_major = original
+
+
+def test_align_user_agent_to_browser_rewrites_a_wrong_platform_token():
+    linux_ua = (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+    )
+    assert align_user_agent_to_browser(
+        linux_ua, "154", "Windows NT 10.0; Win64; x64"
+    ) == (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+    )
+
+
+def test_align_user_agent_to_browser_leaves_the_platform_alone_by_default():
+    linux_ua = "Mozilla/5.0 (X11; Linux x86_64) Chrome/138.0.0.0"
+    assert align_user_agent_to_browser(linux_ua, "154") == (
+        "Mozilla/5.0 (X11; Linux x86_64) Chrome/154.0.0.0"
+    )
+
+
+def test_align_user_agent_to_browser_rewrites_the_platform_without_a_version():
+    linux_ua = "Mozilla/5.0 (X11; Linux x86_64) Chrome/138.0.0.0"
+    assert align_user_agent_to_browser(linux_ua, "", "Windows NT 10.0; Win64; x64") == (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/138.0.0.0"
+    )
+
+
+@pytest.mark.parametrize(
+    "platform,expected",
+    [
+        ("win32", "Windows NT 10.0; Win64; x64"),
+        ("darwin", "Macintosh; Intel Mac OS X 10_15_7"),
+        ("linux", "X11; Linux x86_64"),
+        ("aix7", ""),
+    ],
+)
+def test_get_local_ua_platform_token(platform, expected):
+    with mock.patch("uk_bin_collection.common.sys.platform", platform):
+        assert get_local_ua_platform_token() == expected
+
+
+def test_create_webdriver_local_aligns_the_user_agent_to_the_real_browser():
+    stale = "Mozilla/5.0 (X11; Linux x86_64) Chrome/138.0.0.0 Safari/537.36"
+    with mock.patch(
+        "uk_bin_collection.common.webdriver.Chrome"
+    ) as mock_chrome, mock.patch(
+        "uk_bin_collection.common.ChromeDriverManager"
+    ), mock.patch(
+        "uk_bin_collection.common.get_local_chrome_major_version", return_value="154"
+    ), mock.patch(
+        "uk_bin_collection.common.get_local_ua_platform_token",
+        return_value="Windows NT 10.0; Win64; x64",
+    ):
+        mock_chrome.return_value = mock.MagicMock()
+        create_webdriver(None, headless=True, user_agent=stale)
+
+        options = mock_chrome.call_args.kwargs["options"]
+    assert (
+        "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "Chrome/154.0.0.0 Safari/537.36" in options.arguments
+    )
+
+
+def test_create_webdriver_remote_keeps_the_callers_user_agent():
+    # A remote grid's Chrome version isn't knowable from here, so don't guess.
+    stale = "Mozilla/5.0 Chrome/138.0.0.0 Safari/537.36"
+    with mock.patch(
+        "uk_bin_collection.common.webdriver.Remote"
+    ) as mock_remote, mock.patch(
+        "uk_bin_collection.common.get_local_chrome_major_version",
+        return_value="154",
+    ), mock.patch(
+        "uk_bin_collection.common.get_local_ua_platform_token",
+        return_value="Windows NT 10.0; Win64; x64",
+    ):
+        mock_remote.return_value = mock.MagicMock()
+        create_webdriver("http://selenium:4444", headless=True, user_agent=stale)
+
+        options = mock_remote.call_args.kwargs["options"]
+    assert f"--user-agent={stale}" in options.arguments
+
+
+@pytest.mark.parametrize(
+    "platform,env,expected",
+    [
+        ("win32", {}, True),
+        ("darwin", {}, True),
+        ("linux", {}, False),
+        ("linux", {"DISPLAY": ":99"}, True),
+        ("linux", {"WAYLAND_DISPLAY": "wayland-0"}, True),
+    ],
+)
+def test_has_local_display(platform, env, expected):
+    with mock.patch("uk_bin_collection.common.sys.platform", platform), mock.patch.dict(
+        "uk_bin_collection.common.os.environ", env, clear=True
+    ):
+        assert has_local_display() is expected
+
+
+def test_create_stealth_webdriver_returns_none_without_a_display():
+    with mock.patch("uk_bin_collection.common.has_local_display", return_value=False):
+        assert create_stealth_webdriver() is None
+
+
+def test_create_stealth_webdriver_does_not_pin_the_chrome_version():
+    # Pinning version_main is what broke MidlothianCouncil once Chrome moved
+    # past the hardcoded 146, so undetected-chromedriver must detect it.
+    fake_uc = mock.MagicMock()
+    fake_uc.Chrome.return_value = mock.MagicMock()
+    with mock.patch(
+        "uk_bin_collection.common.has_local_display", return_value=True
+    ), mock.patch.dict("sys.modules", {"undetected_chromedriver": fake_uc}):
+        assert create_stealth_webdriver() is fake_uc.Chrome.return_value
+
+    assert "version_main" not in fake_uc.Chrome.call_args.kwargs
+
+
+def test_create_stealth_webdriver_returns_none_when_the_browser_wont_start():
+    fake_uc = mock.MagicMock()
+    fake_uc.Chrome.side_effect = RuntimeError("no chrome")
+    with mock.patch(
+        "uk_bin_collection.common.has_local_display", return_value=True
+    ), mock.patch.dict("sys.modules", {"undetected_chromedriver": fake_uc}):
+        assert create_stealth_webdriver() is None
+
+
+def test_create_webdriver_prefers_the_stealth_driver_when_asked():
+    sentinel = mock.MagicMock()
+    with mock.patch(
+        "uk_bin_collection.common.create_stealth_webdriver", return_value=sentinel
+    ) as stealth:
+        assert create_webdriver(None, stealth=True) is sentinel
+    stealth.assert_called_once()
+
+
+def test_create_webdriver_ignores_stealth_for_a_remote_grid():
+    # A remote grid can't open a real window, so don't waste a uc start on it.
+    with mock.patch(
+        "uk_bin_collection.common.create_stealth_webdriver"
+    ) as stealth, mock.patch(
+        "uk_bin_collection.common.webdriver.Remote"
+    ) as mock_remote:
+        mock_remote.return_value = mock.MagicMock()
+        create_webdriver("http://selenium:4444", stealth=True)
+    stealth.assert_not_called()
+
+
+def test_create_webdriver_falls_back_when_stealth_is_unavailable():
+    with mock.patch(
+        "uk_bin_collection.common.create_stealth_webdriver", return_value=None
+    ), mock.patch(
+        "uk_bin_collection.common.webdriver.Chrome"
+    ) as mock_chrome, mock.patch(
+        "uk_bin_collection.common.ChromeDriverManager"
+    ):
+        mock_chrome.return_value = mock.MagicMock()
+        create_webdriver(None, stealth=True)
+    mock_chrome.assert_called_once()
