@@ -4,7 +4,8 @@ from datetime import timedelta
 
 from homeassistant.const import Platform
 
-INPUT_JSON_URL = "https://raw.githubusercontent.com/robbrad/UKBinCollectionData/0.173.5/uk_bin_collection/tests/input.json"
+# Keep the council setup fields aligned with the fork package pinned in manifest.json.
+INPUT_JSON_URL = "https://raw.githubusercontent.com/rustyd0g/UKBinCollectionData/2798b821ad107ef5c5a763f703f453345f63fa5e/uk_bin_collection/tests/input.json"
 
 DEFAULT_NAME = "UK Bin Collection Data"
 
